@@ -1,7 +1,9 @@
-﻿namespace ProvaPub.Models
+﻿using ProvaPub.Interfaces;
+
+namespace ProvaPub.Models
 {
-	public class Product
-	{
+	public class Product : IEntityBase
+    {
 		public int Id { get; set; }	
 
 		public string Name { get; set; }

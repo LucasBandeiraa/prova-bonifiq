@@ -19,23 +19,33 @@ namespace ProvaPub.Controllers
 		/// 
 		/// </summary>
 		TestDbContext _ctx;
-		public Parte2Controller(TestDbContext ctx)
+		private readonly ProductService _productService;
+		private readonly CustomerService _customerService;
+		public Parte2Controller
+			(
+
+			TestDbContext ctx,
+			ProductService productService,
+			CustomerService customerService
+			)
 		{
 			_ctx = ctx;
+			_productService = productService;
+			_customerService = customerService;
 		}
 	
 		[HttpGet("products")]
-		public ProductList ListProducts(int page)
+		public ItemList<Product> ListProducts(int page)
 		{
-			var productService = new ProductService(_ctx);
-			return productService.ListProducts(page);
+			//var productService = new ProductService(_ctx);
+			return _productService.ListItems(page);
 		}
 
 		[HttpGet("customers")]
-		public CustomerList ListCustomers(int page)
+		public ItemList<Customer> ListCustomers(int page)
 		{
-			var customerService = new CustomerService(_ctx);
-			return customerService.ListCustomers(page);
+			//var customerService = new CustomerService(_ctx);
+			return _customerService.ListItems(page);
 		}
 	}
 }
