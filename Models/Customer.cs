@@ -2,7 +2,7 @@
 
 namespace ProvaPub.Models
 {
-	public class Customer : IEntityBase
+	public class Customer
 	{
 		public int Id { get; set; }
 		public string Name { get; set; }

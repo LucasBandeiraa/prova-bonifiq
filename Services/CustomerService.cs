@@ -4,7 +4,7 @@ using ProvaPub.Repository;
 
 namespace ProvaPub.Services
 {
-    public class CustomerService : BaseService<Customer>
+    public class CustomerService : BaseService<CustomerList>
     {
         private TestDbContext _ctx;
 

@@ -1,6 +1,9 @@
-﻿namespace ProvaPub.Models
+﻿using ProvaPub.Interfaces;
+
+namespace ProvaPub.Models
 {
-	public class ProductList : ItemList<Product>
+    public class ProductList : ItemList<Product> 
     {
-	}
+
+    }
 }

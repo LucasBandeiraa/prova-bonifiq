@@ -1,10 +1,13 @@
-﻿namespace ProvaPub.Models
+﻿using ProvaPub.Interfaces;
+
+namespace ProvaPub.Models
 {
-    public class ItemList<IEntityBase>
+    public class ItemList<TEntity> : IEntityBase where TEntity : class
     {
-        public virtual List<IEntityBase>? Items { get; set; }
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public virtual List<TEntity>? Items { get; set; }
         public int TotalCount { get; set; }
         public bool HasNext { get; set; }
-
     }
 }

@@ -1,16 +1,20 @@
-﻿using ProvaPub.Models;
-using ProvaPub.Repository;
+﻿using ProvaPub.Interfaces;
+using ProvaPub.Models;
+using static ProvaPub.Models.Payment;
 
 namespace ProvaPub.Services
 {
-    public class ProductService : BaseService<Product>
+    public class PaymentService : IPayment
     {
-        private readonly TestDbContext _ctx;
-
-        public ProductService(TestDbContext ctx) : base(ctx)
+        public Payment Pay(decimal value)
         {
-            _ctx = ctx;
+            return new Payment()
+            {
+                Id = "1",
+                Quantity = value,
+                TransactionDate = DateTime.Now,
+                Status = PaymentStatus.Success,
+            };
         }
-
     }
 }
