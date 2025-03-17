@@ -2,9 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using ProvaPub.Repository;
+using ProvaPub.Data;
 
 #nullable disable
 
@@ -22,7 +20,7 @@ namespace ProvaPub.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("ProvaPub.Models.Customer", b =>
+            modelBuilder.Entity("ProvaPub.Data.Models.Customer", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -141,7 +139,7 @@ namespace ProvaPub.Migrations
                         });
                 });
 
-            modelBuilder.Entity("ProvaPub.Models.Order", b =>
+            modelBuilder.Entity("ProvaPub.Data.Models.Order", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -165,7 +163,7 @@ namespace ProvaPub.Migrations
                     b.ToTable("Orders");
                 });
 
-            modelBuilder.Entity("ProvaPub.Models.Product", b =>
+            modelBuilder.Entity("ProvaPub.Data.Models.Product", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -284,7 +282,7 @@ namespace ProvaPub.Migrations
                         });
                 });
 
-            modelBuilder.Entity("ProvaPub.Models.RandomNumber", b =>
+            modelBuilder.Entity("ProvaPub.Data.Models.RandomNumber", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -303,7 +301,7 @@ namespace ProvaPub.Migrations
                     b.ToTable("Numbers");
                 });
 
-            modelBuilder.Entity("ProvaPub.Models.Order", b =>
+            modelBuilder.Entity("ProvaPub.Data.Models.Order", b =>
                 {
                     b.HasOne("ProvaPub.Models.Customer", "Customer")
                         .WithMany("Orders")
@@ -314,7 +312,7 @@ namespace ProvaPub.Migrations
                     b.Navigation("Customer");
                 });
 
-            modelBuilder.Entity("ProvaPub.Models.Customer", b =>
+            modelBuilder.Entity("ProvaPub.Data.Models.Customer", b =>
                 {
                     b.Navigation("Orders");
                 });

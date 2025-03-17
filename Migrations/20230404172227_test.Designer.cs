@@ -4,11 +4,11 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using ProvaPub.Repository;
+using ProvaPub.Data.Repository;
 
 #nullable disable
 
-namespace ProvaPub.Migrations
+namespace ProvaPub.Data.Migrations
 {
     [DbContext(typeof(TestDbContext))]
     [Migration("20230404172227_test")]

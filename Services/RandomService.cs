@@ -1,29 +1,38 @@
-﻿using Microsoft.EntityFrameworkCore;
-using ProvaPub.Models;
-using ProvaPub.Repository;
+﻿using ProvaPub.Data.Models;
+using ProvaPub.Data.Repository;
+using ProvaPub.UnitOfWork;
+using System;
+using System.Threading.Tasks;
 
 namespace ProvaPub.Services
 {
-	public class RandomService
-	{
-		int seed;
-        TestDbContext _ctx;
-		public RandomService()
+    public class RandomService
+    {
+        private readonly IRandomNumberRepository _repository;
+        private readonly IUnitOfWork _unitOfWork;
+        private static readonly Random _random = new Random();
+
+        public RandomService(IRandomNumberRepository repository, IUnitOfWork unitOfWork)
         {
-            var contextOptions = new DbContextOptionsBuilder<TestDbContext>()
-    .UseSqlServer(@"Server=(localdb)\mssqllocaldb;Database=Teste;Trusted_Connection=True;")
-    .Options;
-            seed = Guid.NewGuid().GetHashCode();
-
-            _ctx = new TestDbContext(contextOptions);
+            _repository = repository;
+            _unitOfWork = unitOfWork;
         }
-        public async Task<int> GetRandom()
-		{
-            var number =  new Random(seed).Next(100);
-            _ctx.Numbers.Add(new RandomNumber() { Number = number });
-            _ctx.SaveChanges();
-			return number;
-		}
 
-	}
+        public async Task<int> GetRandom()
+        {
+            int number;
+            bool isUnique;
+
+            do
+            {
+                number = _random.Next(100); // Numero aleatorio
+                isUnique = !await _repository.Exists(number);
+            } while (!isUnique);
+
+            await _repository.Add(new RandomNumber { Number = number });
+            await _unitOfWork.SaveChangesAsync();
+
+            return number;
+        }
+    }
 }
